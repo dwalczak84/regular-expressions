@@ -1,0 +1,27 @@
+import re
+
+regex_pattern = r"[A-Za-z\_\.A-Za-z]+\@[a-z+\.]+[a-z]+"
+
+T = int(raw_input())
+outputs = []
+
+for i in range(T):
+    S = raw_input()
+    result = re.findall(regex_pattern, S)
+    outputs.append(result)
+
+# strip empty matches
+outputs_clean = [i for i in outputs if i != []]
+
+# flat the list
+outputs_clean = [item for sublist in outputs_clean for item in sublist]
+
+# select only unique matches and sort the list
+outputs = []
+[outputs.append(i) for i in outputs_clean if i not in outputs]
+outputs.sort()
+
+final_output = []
+for i in outputs:
+    final_output.append(str(''.join(i)))
+print ';'.join(final_output)
